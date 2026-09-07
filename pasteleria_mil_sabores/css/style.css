@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap');
+
+/* Colores principales */
+:root {
+    --crema: #FFF5E1;
+    --rosa: #FFC0CB;
+    --chocolate: #8B4513;
+    --texto: #5D4037;
+    --gris: #B0BEC5;
+    --blanco: #FFFFFF;
+}
+
+/* Configuración general */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--crema);
+    color: var(--texto);
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    background-color: var(--blanco);
+    padding: 20px 5%;
+    border-bottom: 3px solid var(--rosa);
+}
+
+header nav .container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Logo */
+header img {
+    width: 90px;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Título */
+header h1 {
+    font-family: 'Pacifico', cursive;
+    color: var(--chocolate);
+    margin: 0;
+}
+
+/* Menú */
+.navbar-menu {
+    margin-left: auto;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
+
+nav a {
+    color: var(--chocolate);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+nav a:hover {
+    color: var(--rosa);
+}
+
+/* Botón del menú para celulares */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--chocolate);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Contenido principal */
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 30px 0;
+}
+
+section h2 {
+    font-family: 'Pacifico', cursive;
+    color: var(--chocolate);
+    margin-bottom: 20px;
+}
+
+/* Sección principal de inicio */
+#inicio {
+    padding-top: 40px;
+}
+
+.inicio-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.inicio-texto {
+    flex: 1;
+}
+
+.inicio-texto h2 {
+    color: var(--chocolate);
+    margin-bottom: 20px;
+}
+
+.inicio-texto p {
+    margin-bottom: 15px;
+}
+
+/* Tarjeta principal de inicio */
+.inicio-contenido:first-child {
+    background-color: var(--rosa);
+    padding: 40px;
+    border-radius: 15px;
+}
+
+/* Imagen de inicio */
+.inicio-imagen {
+    width: 40%;
+    text-align: center;
+}
+
+.inicio-imagen img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Artículos */
+article {
+    background-color: var(--blanco);
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+/* Imágenes dentro de artículos */
+article img {
+    width: 100%;
+    max-width: 300px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+}
+
+/* Enlaces principales */
+main a {
+    display: inline-block;
+    background-color: var(--rosa);
+    color: var(--texto);
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+main a:hover {
+    background-color: var(--chocolate);
+    color: var(--blanco);
+}
+
+/* Botones */
+button {
+    background-color: var(--rosa);
+    color: var(--texto);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--chocolate);
+    color: var(--blanco);
+}
+
+/* Formularios */
+form {
+    background-color: var(--blanco);
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+form label {
+    display: block;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--gris);
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+}
+
+form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Mensajes de error */
+#errores {
+    color: #b00020;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+/* Filtros del catálogo */
+.filtros {
+    background-color: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filtros label {
+    font-weight: 700;
+}
+
+.filtros select,
+.filtros input {
+    padding: 10px;
+    border: 1px solid var(--gris);
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Catálogo de productos */
+#catalogo-productos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Tarjetas de productos */
+.producto {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Imágenes de productos */
+.producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Nombre del producto */
+.producto h3 {
+    color: var(--chocolate);
+    margin-bottom: 10px;
+}
+
+/* Precio */
+.producto .precio {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--chocolate);
+    margin-top: 10px;
+}
+
+/* Mensaje sin resultados */
+.sin-resultados {
+    background-color: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Video */
+iframe {
+    width: 100%;
+    max-width: 700px;
+    height: 400px;
+    display: block;
+    margin: 20px auto;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Pie de página */
+footer {
+    background-color: var(--chocolate);
+    color: var(--blanco);
+    padding: 30px 5%;
+    margin-top: 40px;
+}
+
+footer a {
+    color: var(--blanco);
+    margin-right: 15px;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+
+    header nav .container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    header img {
+        width: 65px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+
+    .navbar-menu {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar-menu.activo {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    section {
+        padding: 20px 0;
+    }
+
+    .inicio-contenido {
+        flex-direction: column;
+    }
+
+    .inicio-contenido:first-child {
+        padding: 25px;
+    }
+
+    .inicio-imagen {
+        width: 100%;
+    }
+
+    #catalogo-productos {
+        grid-template-columns: 1fr;
+    }
+
+    .filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtros select,
+    .filtros input {
+        width: 100%;
+    }
+
+    iframe {
+        height: 250px;
+    }
+}

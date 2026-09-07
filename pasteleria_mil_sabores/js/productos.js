@@ -1,50 +1,47 @@
-//Función para configurar los filtros de productos
-function configurarProductos() {
-    const categoria = document.getElementById("categoria");
-    const busqueda = document.getElementById("busqueda");
-    const productos = document.querySelectorAll(".producto");
-    const sinResultados = document.getElementById("sin-resultados");
-    //Comprueba que los elementos existan antes de continuar
-    if (!categoria || !busqueda) {
+//Obtiene los productos guardados en el navegador
+const productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+//Muestra los productos en el catálogo
+function mostrarProductos(lista) {
+    const catalogo = document.getElementById("catalogo-productos");
+    catalogo.innerHTML = "";
+    if (lista.length === 0) {
+        catalogo.innerHTML = "<p>No hay productos que coincidan con los filtros.</p>";
         return;
     }
-    //Función que realiza el filtrado de productos
-    function filtrarProductos() {
-        const categoriaSeleccionada = categoria.value;
-        const textoBusqueda = busqueda.value.toLowerCase();
-        let productosVisibles = 0;
-
-        productos.forEach(function(producto) {
-            const categoriaProducto = producto.dataset.categoria;
-            const nombreProducto = producto.querySelector("h3").textContent.toLowerCase();
-
-            const coincideCategoria =
-                categoriaSeleccionada === "todos" ||
-                categoriaProducto === categoriaSeleccionada;
-
-            const coincideBusqueda =
-                nombreProducto.includes(textoBusqueda);
-
-            if (coincideCategoria && coincideBusqueda) {
-                producto.style.display = "block";
-                productosVisibles++;
-            } else {
-                producto.style.display = "none";
-            }
-        });
-        //Muestra un mensaje cuando no existen resultados
-        if (productosVisibles === 0) {
-            sinResultados.style.display = "block";
-        } else {
-            sinResultados.style.display = "none";
+    lista.forEach(function(producto) {
+        const articulo = document.createElement("article");
+        let imagen = "";
+        //Comprueba si el producto tiene una imagen
+        if (producto.imagen !== "") {
+            imagen = `
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+            `;
         }
-    }
-    // Detecta cambios en la categoría
-    categoria.addEventListener("change", filtrarProductos);
-    // Detecta cuando el usuario escribe una búsqueda
-    busqueda.addEventListener("input", filtrarProductos);
-    // Ejecuta el filtro al cargar la página
-    filtrarProductos();
+        articulo.innerHTML = `
+            ${imagen}
+            <h3>${producto.nombre}</h3>
+            <p>${producto.descripcion}</p>
+            <p><strong>Precio:</strong> $${producto.precio}</p>
+            <p><strong>Categoria:</strong> ${producto.categoria}</p>
+            <a href="registro.html">Personalizar producto</a>
+        `;
+        catalogo.appendChild(articulo);
+    });
 }
-//Ejecuta la función cuando se carga la página
-document.addEventListener("DOMContentLoaded", configurarProductos);
+
+//Filtra los productos según la categoría seleccionada
+function filtrarProductos() {
+    const categoria = document.getElementById("filtroCategoria").value;
+    const productosFiltrados = productos.filter(function(producto) {
+        const coincideCategoria =
+            categoria === "todos" || producto.categoria === categoria;
+        return coincideCategoria;
+    });
+    mostrarProductos(productosFiltrados);
+}
+
+//Detecta cuando cambia el filtro de categoría
+document.getElementById("filtroCategoria").addEventListener("change", filtrarProductos);
+//Muestra todos los productos al cargar la página
+mostrarProductos(productos);
