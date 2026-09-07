@@ -12,39 +12,39 @@ function validarRegistro() {
 
     //Comprueba que el nombre no esté vacío
     if (nombre === "") {
-        mensajeError += "El nombre no puede quedar vacío.<br>";
+        mensajeError += "*El nombre no puede quedar vacío.<br>";
     }
     //Comprueba que el apellido no esté vacío
     if (apellido === "") {
-        mensajeError += "El apellido no puede quedar vacío.<br>";
+        mensajeError += "*El apellido no puede quedar vacío.<br>";
     }
     // Comprueba que el correo tenga un formato válido
     const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (correo === "") {
-        mensajeError += "El correo no puede quedar vacío.<br>";
+        mensajeError += "*El correo no puede quedar vacío.<br>";
     } else if (!regexCorreo.test(correo)) {
-        mensajeError += "El correo no tiene un formato válido.<br>";
+        mensajeError += "*El correo no tiene un formato válido.<br>";
     }
     //Comprueba que el teléfono no esté vacío
     if (telefono === "") {
-        mensajeError += "El teléfono no puede quedar vacío.<br>";
+        mensajeError += "*El teléfono no puede quedar vacío.<br>";
     }
     // Comprueba que se haya ingresado una fecha
     if (fecha === "") {
-        mensajeError += "La fecha de nacimiento es obligatoria.<br>";
+        mensajeError += "*La fecha de nacimiento es obligatoria.<br>";
     }
     //Comprueba la contraseña
     if (contrasena === "") {
-        mensajeError += "La contraseña no puede quedar vacía.<br>";
+        mensajeError += "*La contraseña no puede quedar vacía.<br>";
     } else if (contrasena.length < 6) {
-        mensajeError += "La contraseña debe tener al menos 6 caracteres.<br>";
+        mensajeError += "*La contraseña debe tener al menos 6 caracteres.<br>";
     }
     //Comprueba que las contraseñas sean iguales
     if (confirmar === "") {
-        mensajeError += "Debes confirmar tu contraseña.<br>";
+        mensajeError += "*Debes confirmar tu contraseña.<br>";
     } else if (contrasena !== confirmar) {
-        mensajeError += "Las contraseñas no coinciden.<br>";
+        mensajeError += "*Las contraseñas no coinciden.<br>";
     }
     //Muestra los errores encontrados
     document.getElementById("errores").innerHTML = mensajeError;
@@ -61,9 +61,34 @@ document.getElementById("datos").addEventListener("submit", function(event) {
     if (!validarRegistro()) {
         event.preventDefault();
     } else {
-        event.preventDefault();
-
-        alert("Registro realizado correctamente!");
-    }
+        event.preventDefault(); 
+        //Obtiene los usuarios que ya están guardados 
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || []; 
+        //Comprueba si el correo ya está registrado 
+        const usuarioExistente = usuarios.find(function(usuario) { 
+            return usuario.correo === document.getElementById("correo").value.trim(); 
+        }); 
+            if (usuarioExistente) { 
+                document.getElementById("errores").innerHTML = "*Este correo ya se encuentra registrado."; 
+                return; 
+            } 
+            //Crea el nuevo usuario
+            const nuevoUsuario = { 
+                nombre: document.getElementById("nom").value.trim(), 
+                apellido: document.getElementById("apellido").value.trim(), 
+                correo: document.getElementById("correo").value.trim(), 
+                telefono: document.getElementById("telefono").value.trim(), 
+                fecha: document.getElementById("fecha").value, 
+                contrasena: document.getElementById("contrasena").value 
+            }; 
+                //Agrega el usuario a la lista
+                usuarios.push(nuevoUsuario); 
+                //Guarda los usuarios en el navegador
+                localStorage.setItem("usuarios", JSON.stringify(usuarios)); 
+                //Muestra el mensaje de registro exitoso 
+                alert("Registro realizado correctamente!"); 
+                //Limpia el formulario 
+                document.getElementById("datos").reset(); 
+                }
 
 });
